@@ -421,10 +421,11 @@ User.connect = function (req, auth, info, callback) {
           User.getByEmail(data.email, function (err, user) {
             if (err || !user) { return callback(err) }
 
-            return callback(null, false, {
-              message: error.message,
-              providers: user.providers
-            })
+            Object.assign(user.providers,data.providers);
+
+            User.patch(user._id, user, {}, function() {
+              callback(null, user, { message: 'Registered successfully' })
+            });
           })
 
         // Handle other error
