@@ -32,7 +32,8 @@ module.exports = function (server) {
 
   server.get('/v1/users', authorize, function (req, res, next) {
     User.list({
-      // options
+      page: req.query.page,
+      size: req.query.limit
     }, function (err, instances) {
       if (err) { return next(err) }
       res.json(instances)
