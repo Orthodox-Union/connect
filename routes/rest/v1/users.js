@@ -57,6 +57,7 @@ module.exports = function (server) {
    */
 
   server.post('/v1/users', authorize, function (req, res, next) {
+    req.body.email = req.body.email.toLowerCase()
     User.insert(req.body, function (err, instance) {
       if (err) { return next(err) }
       res.status(201).json(instance)
