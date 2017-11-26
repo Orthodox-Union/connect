@@ -291,7 +291,7 @@ User.insert = function (data, options, callback) {
  */
 
 User.authenticate = function (email, password, callback) {
-  User.getByEmail(email, { private: true }, function (err, user) {
+  User.getByEmail(email.toLowerCase(), { private: true }, function (err, user) {
     if (err) { return callback(err) }
     if (!user) {
       return callback(null, false, {
