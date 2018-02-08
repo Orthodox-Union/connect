@@ -87,8 +87,6 @@ function authorize (req, res, next) {
             }
           }
 
-          }
-
           var idToken = new IDToken({
             iss: settings.issuer,
             sub: req.user._id,
